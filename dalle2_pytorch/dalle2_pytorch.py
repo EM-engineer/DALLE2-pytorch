@@ -2938,6 +2938,7 @@ class Decoder(nn.Module):
         times = list(reversed(times.int().tolist()))
         time_pairs = list(zip(times[:-1], times[1:]))
         time_pairs = list(filter(lambda t: t[0] > t[1], time_pairs))
+        images = self.decoder.sample(image_embed = image_embed, text = text_cond, cond_scale = cond_scale)
 
         is_inpaint = exists(inpaint_image)
         resample_times = inpaint_resample_times if is_inpaint else 1
